@@ -8,5 +8,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "terser-webpack-plugin": "^5.3.10",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
+  }
 }
