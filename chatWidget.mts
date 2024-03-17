@@ -1,15 +1,40 @@
+
+
+
+
 class ChatWidget {
-  constructor() {
+  constructor(placement: string) {
     const chatWidget = document.createElement("div");
     chatWidget.id = "chat-widget";
     chatWidget.style.position = "fixed";
     chatWidget.style.bottom = "20px";
-    chatWidget.style.right = "20px";
+    if(placement === "right"){
+      chatWidget.style.right = "20px";
+    }else{
+      chatWidget.style.left = "20px";
+    }
     chatWidget.style.zIndex = "1000";
 
+    let chatBodyClass =`
+      flex-direction: column-reverse; 
+      display: none; 
+      position: absolute; 
+      bottom: 60px; 
+      overflow-y: auto; 
+      width: 250px; 
+      height: 350px;
+      background: #fff; 
+      box-shadow: 0 0 10px rgba(0,0,0,0.2); 
+      padding: 10px; `;
+
+    if(placement === "right"){
+      chatBodyClass += "right: 0;"
+    }else{
+      chatBodyClass += "left: 0;"
+    }
+
     chatWidget.innerHTML = `
-        <div id="chat-body" style="flex-direction: column-reverse; display: none; position: absolute; bottom: 60px; right: 0; overflow-y: auto; width: 250px; height: 350px;
-        background: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.2); padding: 10px; ">
+        <div id="chat-body" style="${chatBodyClass}">
           <div id="input-container" style="display: flex; align-items: center;">
             <input type="text" id="chat-user-input" placeholder="Type your message..." style="flex: 1; padding: 5px; margin-right: 10px;">
             <button id="chat-send-btn" style="padding: 5px 10px; background-color: #30a4f8; color: white; border: none; cursor: pointer;">Send</button>
@@ -72,5 +97,11 @@ class ChatWidget {
 }
 
 if (document.currentScript) {
-  new ChatWidget();
+  let position: string  = "right"
+  const scriptTag = document.querySelector('script[chat-data-position]') as HTMLScriptElement;
+  if (scriptTag) {
+    position = scriptTag.getAttribute('chat-data-position') || "right";
+  }
+
+  new ChatWidget(position);
 }
