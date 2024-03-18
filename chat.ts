@@ -136,7 +136,7 @@ class ChatWidget {
     this.chatWidget.addEventListener('click', (event) => {
       const target = event.target as HTMLElement;
       if (target.id === 'chat-send-btn') {
-        const chatInput = this.chatWidget.querySelector('input[type="text"]') as HTMLInputElement;
+        const chatInput = this.chatWidget.querySelector('#chat-user-input') as HTMLInputElement;
         const message = chatInput.value;
         this.sendMessage(message, true);
         chatInput.value = '';
@@ -159,8 +159,8 @@ class ChatWidget {
           callInput.style.display = "none";
           if(switchBtn) switchBtn.innerHTML = this.phoneImg;
         }
-        callInput.value = "";
-        chatInput.value = "";
+        callInput.querySelector('#call-user-input').value = "";
+        chatInput.querySelector('#chat-user-input').value = "";
       } else if(target.id === 'chat-widget-icon'){
         if(type === "calling-small"){
           this.initiateCall();

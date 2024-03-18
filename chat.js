@@ -74,10 +74,11 @@ var ChatWidget = /** @class */ (function () {
         this.chatWidget.addEventListener('click', function (event) {
             var target = event.target;
             if (target.id === 'chat-send-btn') {
-                var chatInput = _this.chatWidget.querySelector('input[type="text"]');
+                var chatInput = _this.chatWidget.querySelector('#chat-user-input');
                 var message = chatInput.value;
                 _this.sendMessage(message, true);
                 chatInput.value = '';
+                console.log(chatInput);
                 _this.sendMessage("hi,we'll be with you right away!", false);
             }
             else if (target.id === 'chat-call-btn') {
@@ -102,8 +103,8 @@ var ChatWidget = /** @class */ (function () {
                     if (switchBtn)
                         switchBtn.innerHTML = _this.phoneImg;
                 }
-                callInput.value = "";
-                chatInput.value = "";
+                callInput.querySelector('#call-user-input').value = "";
+                chatInput.querySelector('#chat-user-input').value = "";
             }
             else if (target.id === 'chat-widget-icon') {
                 if (type === "calling-small") {
