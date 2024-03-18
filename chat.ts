@@ -102,6 +102,9 @@ class ChatWidget {
           </div>
         `
         break;
+      case "calling-small":
+        chatWidget.innerHTML = ""
+        break;
       default:
         chatWidget.innerHTML = 
         `
@@ -168,12 +171,16 @@ class ChatWidget {
     const chatContainer: any = chatWidget.querySelector("#chat-container");
 
     const icon = document.createElement("img");
-    icon.src = "https://chat-widget-ts.vercel.app/chat.png";
+    icon.src = `https://chat-widget-ts.vercel.app/${widgetType === "calling-small" ? "phone.png" : "chat.png"}`;
     icon.alt = "chat.png";
     icon.style.cursor = "pointer";
     icon.addEventListener("click", () => {
-      chatBody.style.display =
+      if(widgetType === "calling-small"){
+        this.initiateCall();
+      }else{
+        chatBody.style.display =
         chatBody.style.display === "none" ? "flex" : "none";
+      }
     });
 
     chatWidget.appendChild(icon);

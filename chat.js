@@ -37,6 +37,9 @@ var ChatWidget = /** @class */ (function () {
                 chatWidget.innerHTML =
                     "\n            <div id=\"chat-body\" style=\"".concat(chatBodyClass, "\">\n              <div id=\"input-container-call\" style=\"display: flex; align-items: center;\">\n              <input type=\"text\" id=\"call-user-input\" placeholder=\"Phone or schedule..\" style=\"flex: 1; padding: 5px; margin-right: 10px;\">\n              <button id=\"chat-call-btn\" style=\"padding: 5px 10px; background-color: #30a4f8; color: white; border: none; cursor: pointer;\">Call</button>\n            </div>\n            <div id=\"chat-container\" style=\"position: relative; flex-direction: column-reverse; display: flex; height: 90%;\">\n              <div style=\"flex-direction: column; display: flex; overflow-y: auto; max-height: 80%;\" id=\"chat-messages\"></div>\n            </div>\n          </div>\n        ");
                 break;
+            case "calling-small":
+                chatWidget.innerHTML = "";
+                break;
             default:
                 chatWidget.innerHTML =
                     "\n            <div id=\"chat-body\" style=\"".concat(chatBodyClass, "\">\n            <div id=\"chat-container\" style=\"position: relative; flex-direction: column-reverse; display: flex; height: 90%;\">\n              <div style=\"flex-direction: column; display: flex; overflow-y: auto; max-height: 80%;\" id=\"chat-messages\"></div>\n            </div>\n          </div>\n        ");
@@ -87,12 +90,17 @@ var ChatWidget = /** @class */ (function () {
         }
         var chatContainer = chatWidget.querySelector("#chat-container");
         var icon = document.createElement("img");
-        icon.src = "https://chat-widget-ts.vercel.app/chat.png";
+        icon.src = "https://chat-widget-ts.vercel.app/".concat(widgetType === "calling-small" ? "phone.png" : "chat.png");
         icon.alt = "chat.png";
         icon.style.cursor = "pointer";
         icon.addEventListener("click", function () {
-            chatBody.style.display =
-                chatBody.style.display === "none" ? "flex" : "none";
+            if (widgetType === "calling-small") {
+                _this.initiateCall();
+            }
+            else {
+                chatBody.style.display =
+                    chatBody.style.display === "none" ? "flex" : "none";
+            }
         });
         chatWidget.appendChild(icon);
     }
