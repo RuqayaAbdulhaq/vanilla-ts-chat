@@ -4,7 +4,7 @@ module.exports = {
   mode: 'production',
   entry: './chat.ts',
   output: {
-    filename: 'chat.min.mjs',
+    filename: 'chatWidget.min.mjs',
     path: __dirname + '/public',
   },
   resolve: {
