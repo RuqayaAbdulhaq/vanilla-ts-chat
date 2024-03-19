@@ -1,26 +1,26 @@
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-  mode: 'production', // Ensures that the build is optimized
-  entry: './chat.ts', // Update this path to your TypeScript entry file
+  mode: 'production',
+  entry: './chat.ts',
   output: {
-    filename: 'chatWidget.min.mjs', // Desired output file name
-    path: __dirname + '/dist', // Output directory (ensure this exists or is created)
+    filename: 'chat.min.mjs',
+    path: __dirname + '/public',
   },
   resolve: {
-    extensions: ['.ts', '.js'], // Correct extensions to resolve
+    extensions: ['.ts', '.js'],
   },
   module: {
     rules: [
       {
-        test: /\.ts$/, // Matches .ts files
-        use: 'ts-loader', // Uses ts-loader for TypeScript files
-        exclude: /node_modules/, // Excludes node_modules
+        test: /\.ts$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
       },
     ],
   },
   optimization: {
-    minimize: true, // Enables minification
-    minimizer: [new TerserPlugin()], // Uses TerserPlugin for minification
+    minimize: true,
+    minimizer: [new TerserPlugin()],
   },
 };
